@@ -22,9 +22,9 @@ Term: Spring 2019
 
 + Team #9
 + **2018 NYC Yellow Taxi 2.0: For Drivers**:
-	+ Haiqing Xu
-	+ Shengjie Sun
 	+ Ziyi Liao
+	+ Shengjie Sun
+	+ Haiqing Xu
 	+ Xinzhu Wang
 	+ Shiwei Hua
 
