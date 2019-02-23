@@ -30,7 +30,7 @@ Term: Spring 2019
 
 + **Project summary**: 
 
-The **Shiny App 2018 NYC Yellow Taxi 2.0**: For Drivers is an updated version of the Open Data App. Our updated app is designed specifically for taxi drivers’ reference. 
+The **Shiny App 2018 NYC Yellow Taxi 2.0: For Drivers** is an updated version of the Open Data App. Our updated app is designed specifically for taxi drivers’ reference. 
 
 In this project, we updated the data to the 2018 yellow taxi rides in New York City and analyzed 63.4-million records. Instead of using neighborhood zones, we restructured to NYC TLC taxi zones for better user experiences. Besides updating color-codes in the density of taxi rides, fare per distance, and distinctions between business and non-business days, we added tips percentages and top-three popular destinations to provide better visual representation and references for drivers.
 
