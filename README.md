@@ -17,7 +17,7 @@ The **learning goals** for this project is:
 
 *The above general statement about project 2 can be removed once you are finished with your project. It is optional.
 
-## Project Title 2018 NYC Yellow Taxi 2.0: For Drivers
+## Project Title: 2018 NYC Yellow Taxi 2.0: For Drivers
 Term: Spring 2019
 
 + Team #9
