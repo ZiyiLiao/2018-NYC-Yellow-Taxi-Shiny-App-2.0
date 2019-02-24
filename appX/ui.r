@@ -16,7 +16,7 @@ library(leaflet)
                                      width = 160, height = 130,
                                      
                                      radioButtons("layers", label = "Layers",
-                                                  choices = list("Count Number" = "count", "Fare Per Distance" = "FPD","Tips" = "Tips"), 
+                                                  choices = list("Pick Up Numbers" = "count", "Tips" = "tips"), 
                                                   selected = "count")
                           ),
                           fixedPanel(id = "controls", class = "panel panel-default",

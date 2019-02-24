@@ -14,14 +14,19 @@ library(htmltools)
 setwd('../')
 
 # graphical parameters
+color = list(color1 = c('#F2D7D5','#D98880', '#CD6155', '#C0392B', '#922B21','#641E16'),
+             color2 = c('#e6f5ff','#abdcff', '#70c4ff', '#0087e6', '#005998','#00365d'))
+bin = list(bin1 = c(0,100,1000,10000,100000,1000000,10000000), bin2 = c(0,0.05,0.1,0.15,0.2,0.25,9900))
+label = list(label1 = c("<100","100-1000","1000~10,000","10,000~100,000","100,000~1,000,000","1,000,000~10,000,000"),
+             label2 = c("0-0.05","0.05-0.1","0.1-0.15","0.15-0.2","0.2-0.25","0.25+"))
+title = list(t1 = "Pick Up Numbers", t2 = "Tip Percentage")
 
 # load data
 Shape <- readOGR('data/taxi_zones', 'taxi_zones') %>% 
   spTransform(CRS("+init=epsg:4326"))
 
 Count <- readRDS('output/count_separated.rds')
-Fpd <- readRDS('output/fpd_separated.rds')
-Tips <- readRDS('output/tip.rds')
+Tips <- readRDS('output/tips_separated.rds')
 Dropoff <- readRDS('output/dropoff_frequency.rds')
 
 # Server
@@ -32,40 +37,71 @@ server <- function(input,output, session){
     # calculate intermediate data
     if (input$days == "All Day"){
       count_temp = Count %>% apply(c(1,2), sum)
-      fpd_temp = Fpd %>% apply(c(1,2), mean, na.rm = T)
+      tips_temp = Tips %>% apply(c(1,2), mean, na.rm = T)
     }else{
       count_temp = Count[ , , (input$days == "Business Day") + 1]
-      fpd_temp = Fpd[ , , (input$days == "Business Day") + 1]
+      tips_temp = Tips[ , , (input$days == "Business Day") + 1]
     }
 
     if (!input$showhr){
       Shape@data$count = count_temp %>% apply(1, sum)
-      Shape@data$fpd = fpd_temp %>% apply(1, mean, na.rm = T)
+      Shape@data$tips = tips_temp %>% apply(1, mean, na.rm = T)
     }else{
       Shape@data$count = count_temp[, input$hr_adjust+1]
-      Shape@data$fpd = fpd_temp[, input$hr_adjust+1]
+      Shape@data$tips = tips_temp[, input$hr_adjust+1]
       dropoff_temp = Dropoff %>% filter(busi == (input$days == "Business Day"),
                                         hour == input$hr_adjust + 1)
     }
     
-    
-    
-    Background <- leaflet() %>% 
-      addSearchOSM() %>%
-      addResetMapButton() %>%
-      addTiles(group = "OSM") %>%
-      addProviderTiles("CartoDB", group="CartoDB")  %>%
-      setView(lat=40.7128, lng=-74.0059, zoom=12) %>%
-      addLayersControl(baseGroups=c("CartoDB", "OSM"))
-    
-    count_pal <- colorNumeric("YlOrRd", domain = Shape@data$count)
-    
-    Background %>%
-      addPolygons(data=Shape, weight=1, fillOpacity = .5,
-                  color = ~count_pal(count), 
-                  label = ~paste0("Number of counts: ", count),
-                  highlightOptions = highlightOptions(weight = 3,
-                                              color = "white", bringToFront = TRUE))
+    # determine which layer to work with
+    if (input$layers == "count"){
+      Background <- leaflet() %>% 
+        addSearchOSM() %>%
+        addResetMapButton() %>%
+        addTiles(group = "OSM") %>%
+        addProviderTiles("CartoDB", group="CartoDB")  %>%
+        setView(lat=40.7130, lng=-74.0059, zoom=11) %>%
+        addLayersControl(baseGroups=c("CartoDB", "OSM"))
+      
+      pal1 = colorBin(color[[1]], bins = bin[[1]])
+      
+      Background %>%
+        addPolygons(data=Shape, weight=1, fillOpacity = .5,
+                    fillColor = ~pal1(count), 
+                    label = ~paste0(zone," , Number of counts: ", count),
+                    highlightOptions = highlightOptions(weight = 3,
+                                  color = "white", bringToFront = TRUE)) %>%
+        addLegend(position = "bottomright",
+                  colors = color[[1]],
+                  labels = label[[1]],
+                  opacity = 0.6,
+                  title = title[[1]])
+      
+    }
+    else if (input$layers == "tips"){
+      Background <- leaflet() %>% 
+        addSearchOSM() %>%
+        addResetMapButton() %>%
+        addTiles(group = "OSM") %>%
+        addProviderTiles("CartoDB", group="CartoDB")  %>%
+        setView(lat=40.7130, lng=-74.0059, zoom=11) %>%
+        addLayersControl(baseGroups=c("CartoDB", "OSM"))
+      
+      pal2 <- colorBin(color[[2]], bins = bin[[2]])
+      
+      Background %>%
+        addPolygons(data=Shape, weight=1, fillOpacity = .5,
+                    fillColor = ~pal2(tips), 
+                    label = ~paste0(zone," , Tip Percentage ", tips),
+                    highlightOptions = highlightOptions(weight = 3,
+                                              color = "white", bringToFront = TRUE)) %>%
+        addLegend(position = "bottomright",
+                  colors = color[[2]],
+                  labels = label[[2]],
+                  opacity = 0.6,
+                  title = title[[2]])
+    }
+  
   })
   
 }
