@@ -1,5 +1,8 @@
-
+.RData
 data/2018_Yellow_Taxi_Trip_Data.csv
 .Rhistory
 data/2018_Yellow_Taxi_Trip_Data_test.csv
 data/taxi_zones.zip
+*.RProj.user/
+*.Rproj
+.Rproj.user

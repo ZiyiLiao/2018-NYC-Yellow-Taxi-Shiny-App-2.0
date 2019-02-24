@@ -1,6 +1,6 @@
 library(leaflet)
   navbarPage("NYC Yellow Taxi", id = "navigation",
-             tabPanel("Interactive Map",
+             tabPanel("Statistical Map",
                       div(class="outer",
                           
                           tags$head(
@@ -44,5 +44,53 @@ library(leaflet)
                                      
                           )
                       )
-             )
-  )
+             ),
+             
+             tabPanel("Interactive Map",
+                      div(class="outer",
+                          
+                          tags$head(
+                            #change the layout formats
+                            includeCSS("styles.css"),
+                            includeScript("gomap.js")
+                          ),
+                          
+                          leafletOutput("Imap", width="100%", height="100%"),
+                          
+                          fixedPanel(id = "Icontrols", class = "panel panel-default", 
+                                     draggable = T, top = 60, left = "auto", right = 5, bottom = "auto",
+                                     width = 160, height = 130,
+                                     
+                                     radioButtons("Ilayers", label = "Layers",
+                                                  choices = list("Pick Up Numbers" = "count"), 
+                                                  selected = "count")
+                          ),
+                          fixedPanel(id = "Icontrols", class = "panel panel-default",
+                                     draggable = TRUE, top = 60, left = 5, right = "auto", bottom = "auto",
+                                     width = 330, height = "auto",
+                                     h3("Panel"),
+                                     
+                                     
+                                     selectInput("Idays", h4("Days"), c("Business Day", "Not Business Day"),selected = "Business Day"),
+                                     
+                                     checkboxInput(inputId = "Ishowhr",
+                                                   label = strong("Show hours"),
+                                                   value = FALSE),
+                                     
+                                     conditionalPanel(condition = "input.Ishowhr == false"
+                                                      
+                                     ),
+                                     
+                                     
+                                     conditionalPanel(condition = "input.Ishowhr == true",
+                                                      sliderInput(inputId = "Ihr_adjust",
+                                                                  label = "Choose the time of the day:",
+                                                                  min = 0, max = 23, value = NULL, step = 1)
+
+  
+                                     )
+                                     
+                          )
+                 )
+         )
+)

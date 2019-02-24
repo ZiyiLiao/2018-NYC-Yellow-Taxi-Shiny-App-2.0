@@ -30,8 +30,22 @@ Tips <- readRDS('output/tips_separated.rds')
 Dropoff <- readRDS('output/dropoff_frequency.rds')
 
 # Server
-server <- function(input,output, session){
+shinyServer(function(input, output,session) { 
   
+  # save the input variables we want to use in the observe function below
+  click <- reactive({
+    
+    # select the input your want
+    days <- input$Idays
+    event <- input$Imap_shape_click
+    hour <- input$Ihr_adjust
+    
+    # return the input you want
+    return(list(data = event, days = days, hour = hour ))
+    
+  })
+  
+  # create statistical map output
   output$map <- renderLeaflet({
     
     # calculate intermediate data
@@ -92,7 +106,7 @@ server <- function(input,output, session){
       Background %>%
         addPolygons(data=Shape, weight=1, fillOpacity = .5,
                     fillColor = ~pal2(tips), 
-                    label = ~paste0(zone," , Tip Percentage ", tips),
+                    label = ~paste0(zone," , Tip Percentage: ", tips),
                     highlightOptions = highlightOptions(weight = 3,
                                               color = "white", bringToFront = TRUE)) %>%
         addLegend(position = "bottomright",
@@ -100,8 +114,55 @@ server <- function(input,output, session){
                   labels = label[[2]],
                   opacity = 0.6,
                   title = title[[2]])
+      
     }
   
   })
   
-}
+  # create interactive map output
+  output$Imap <- renderLeaflet({
+    # create a basic layer that has no information
+    Background <- leaflet() %>% 
+      addSearchOSM() %>%
+      addResetMapButton() %>%
+      addTiles(group = "OSM") %>%
+      addProviderTiles("CartoDB", group="CartoDB")  %>%
+      setView(lat=40.7130, lng=-74.0059, zoom=11) %>%
+      addLayersControl(baseGroups=c("CartoDB", "OSM"))
+    
+    
+    IBackground <- Background %>%
+      addPolygons(data=Shape, weight=1, fillOpacity = .5,color = "grey",
+                  highlightOptions = highlightOptions(weight = 3,
+                                      color = "white", bringToFront = TRUE))
+    
+  })
+  
+  # create observe for interactive map based on click information
+  observe({
+    event <- click()$data
+    if (is.null(event))
+      return()
+    
+    days <- click()$days
+    hr_adjusted <- click()$hour + 1
+    
+    # get the ID of the polygon that you click on
+    lnglat = data.frame(Longitude = event$lng, Latitude = event$lat)
+    coordinates(lnglat) <- ~ Longitude + Latitude
+    proj4string(lnglat) <- CRS("+proj=longlat")
+    lnglat <- spTransform(lnglat, proj4string(Shape))
+    click_info <- over(lnglat, Shape)
+    click_ID <- click_info$LocationID
+    
+    # get the top_3 destination if pick up from the clicked polygon
+    top3_info <- Dropoff %>% 
+      filter(busi == (days == 'Business Day'), hour == hr_adjusted,
+                     PULocationID == click_ID) %>% 
+      arrange(desc(n)) %>% top_n(3)
+
+    print(top3_info)
+    
+  })
+  
+})
