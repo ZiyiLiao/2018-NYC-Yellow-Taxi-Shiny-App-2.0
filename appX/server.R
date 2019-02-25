@@ -154,18 +154,21 @@ shinyServer(function(input, output,session) {
       arrange(desc(n)) %>% 
       top_n(3) %>% 
       filter(n > 0)
-
-    print(1)
+    
+    freq <- rep(NA,263)
+    freq[Shape$LocationID %in% top3_info$DOLocationID] <- top3_info$freq
+    Shape@data$freq <- freq
+    
     # add top3_info to IBackground
     
     leafletProxy("Imap") %>%
       clearGroup(group = "Once Plot") %>%
-      addPolygons(data = Shape[Shape$LocationID==top3_info$DOLocationID, ], 
-                  weight = 1, fillOpacity = .5,color = "red",
+      addPolygons(data = Shape[Shape$LocationID %in% top3_info$DOLocationID, ], 
+                  label = ~paste0(zone, " Percentage: ", freq),
+                  weight = 1, fillOpacity = .5, color = "red",
                  highlightOptions = highlightOptions(weight = 3, color = "white", bringToFront = TRUE),
-                 group = "Once Plot"
-      )
-    print(2)
+                 group = "Once Plot") %>%
+      addMarkers(lnglat$Longitude, lnglat$Latitude, group = "Once Plot")
     
   })
   
