@@ -12,20 +12,20 @@ library(leaflet)
                           leafletOutput("map", width="100%", height="100%"),
                           
                           fixedPanel(id = "controls", class = "panel panel-default", 
-                                     draggable = T, top = 60, left = "auto", right = 5, bottom = "auto",
+                                     draggable = T, top = 60, right = 5,
                                      width = 160, height = 130,
                                      
-                                     radioButtons("layers", label = "Layers",
+                                     radioButtons("layers", label = h4("Layers"),
                                                   choices = list("Pick Up Numbers" = "count", "Tips" = "tips"), 
                                                   selected = "count")
                           ),
                           fixedPanel(id = "controls", class = "panel panel-default",
-                                     draggable = TRUE, top = 60, left = 5, right = "auto", bottom = "auto",
+                                     draggable = TRUE, top = 60, left = 40,
                                      width = 330, height = "auto",
                                      h3("Panel"),
                                      
                                      
-                                     selectInput("days", h4("Days"), c("All Day", "Business Day", "Not Business Day"),selected = "All Day"),
+                                     selectInput("days", h4("Days"), c("All Day", "Business Day", "Non-business Day"),selected = "All Day"),
                                      
                                      checkboxInput(inputId = "showhr",
                                                    label = strong("Show hours"),
@@ -57,21 +57,21 @@ library(leaflet)
                           
                           leafletOutput("Imap", width="100%", height="100%"),
                           
-                          fixedPanel(id = "Icontrols", class = "panel panel-default", 
-                                     draggable = T, top = 60, left = "auto", right = 5, bottom = "auto",
+                          fixedPanel(id = "controls", class = "panel panel-default", 
+                                     draggable = T, top = 60, right = 5,
                                      width = 160, height = 130,
                                      
-                                     radioButtons("Ilayers", label = "Layers",
+                                     radioButtons("Ilayers", label = h4("Layers"),
                                                   choices = list("Pick Up Numbers" = "count"), 
                                                   selected = "count")
                           ),
-                          fixedPanel(id = "Icontrols", class = "panel panel-default",
-                                     draggable = TRUE, top = 60, left = 5, right = "auto", bottom = "auto",
+                          fixedPanel(id = "controls", class = "panel panel-default",
+                                     draggable = TRUE, top = 60, left = 40,
                                      width = 330, height = "auto",
                                      h3("Panel"),
                                      
                                      
-                                     selectInput("Idays", h4("Days"), c("Business Day", "Not Business Day"),selected = "Business Day"),
+                                     selectInput("Idays", h4("Days"), c("Business Day", "Non-business Day"),selected = "Business Day"),
                                      
                                      checkboxInput(inputId = "Ishowhr",
                                                    label = strong("Show hours"),
