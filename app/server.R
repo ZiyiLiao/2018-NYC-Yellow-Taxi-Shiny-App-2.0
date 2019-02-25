@@ -29,12 +29,12 @@ title <- list(t1 = "Pick Up Numbers",
              t2 = "Tip Percentage")
 
 Background <- leaflet() %>% 
-  addSearchOSM() %>%
+  addSearchOSM(options = searchOptions(autoCollapse = TRUE, minLength = 2)) %>%
   addResetMapButton() %>%
   addTiles(group = "OSM") %>%
   addProviderTiles("CartoDB", group="CartoDB")  %>%
   setView(lat=40.7130, lng=-74.0059, zoom=11) %>%
-  addLayersControl(baseGroups=c("CartoDB", "OSM"))
+  addLayersControl(baseGroups=c("CartoDB", "OSM"), position = "bottomleft")
 
 # load data
 Shape <- readOGR('data/taxi_zones', 'taxi_zones') %>% 
