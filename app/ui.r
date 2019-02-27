@@ -43,7 +43,7 @@ library(leaflet)
                                      ),
                                      plotOutput("districttimeplot", height = 180),
                                      helpText(   a("Instruction",
-                                                   href="http://htmlpreview.github.io/?https://github.com/TZstatsADS/Spring2019-Proj2-grp9/blob/master/doc/instruction.html")
+                                                   href="https://github.com/TZstatsADS/Spring2019-Proj2-grp9/blob/master/doc/2018%20NYC%20Yellow%20Taxi%20Trip%20Analysis%20Instruction.pdf")
                                      )
                                      
                           )

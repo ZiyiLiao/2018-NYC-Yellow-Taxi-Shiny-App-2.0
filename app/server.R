@@ -29,7 +29,6 @@ title <- list(t1 = "Pick Up Numbers",
              t2 = "Tip Percentage")
 
 Background <- leaflet() %>% 
-  addSearchOSM(options = searchOptions(autoCollapse = TRUE, minLength = 2)) %>%
   addResetMapButton() %>%
   addTiles(group = "OSM") %>%
   addProviderTiles("CartoDB", group="CartoDB")  %>%
