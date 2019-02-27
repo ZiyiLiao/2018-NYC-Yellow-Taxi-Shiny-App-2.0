@@ -40,6 +40,10 @@ library(leaflet)
                                                       sliderInput(inputId = "hr_adjust",
                                                                   label = "Choose the time of the day:",
                                                                   min = 0, max = 23, value = NULL, step = 1)
+                                     ),
+                                     plotOutput("districttimeplot", height = 180),
+                                     helpText(   a("Instruction",
+                                                   href="https://github.com/TZstatsADS/Spring2019-Proj2-grp9/blob/master/doc/instruction.html")
                                      )
                                      
                           )
