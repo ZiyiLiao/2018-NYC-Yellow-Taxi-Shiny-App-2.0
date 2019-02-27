@@ -21,7 +21,7 @@ The **learning goals** for this project is:
 Term: Spring 2019
 
 + Team #9
-+ **2018 NYC Yellow Taxi 2.0: For Drivers**:
++ **2018 NYC Yellow Taxi Shiny App 2.0**:
 	+ Ziyi Liao
 	+ Shengjie Sun
 	+ Haiqing Xu
