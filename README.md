@@ -18,6 +18,7 @@ The **learning goals** for this project is:
 *The above general statement about project 2 can be removed once you are finished with your project. It is optional.
 
 ## Project Title: 2018 NYC Yellow Taxi Shiny App 2.0
+
 [Published Shiny App](https://xhqkatrina.shinyapps.io/shiny_nyctaxi/)
 Term: Spring 2019
 
