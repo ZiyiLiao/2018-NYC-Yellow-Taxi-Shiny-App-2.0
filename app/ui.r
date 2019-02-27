@@ -43,7 +43,7 @@ library(leaflet)
                                      ),
                                      plotOutput("districttimeplot", height = 180),
                                      helpText(   a("Instruction",
-                                                   href="https://github.com/TZstatsADS/Spring2019-Proj2-grp9/blob/master/doc/instruction.html")
+                                                   href="http://htmlpreview.github.io/?https://github.com/TZstatsADS/Spring2019-Proj2-grp9/blob/master/doc/instruction.html")
                                      )
                                      
                           )
