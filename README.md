@@ -22,7 +22,7 @@ Term: Spring 2019
 
 + Team #9
 
-Group members:
++ Group members:
 	+ Ziyi Liao
 	+ Shengjie Sun
 	+ Haiqing Xu
