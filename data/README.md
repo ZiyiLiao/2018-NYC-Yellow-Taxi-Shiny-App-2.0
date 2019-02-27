@@ -6,5 +6,5 @@ The data directory contains data used in the analysis. This is treated as read o
 
 Here, we have **Taxi Zone Shape Data** from NYC Taxi and Limousine Commission (TLC) and the **2018 Yellow Taxi Trip Data** (Raw) given by NYC Open data. Enclosed are the URLs for the data:
 
-1. https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
-2. https://data.cityofnewyork.us/Transportation/2018-Yellow-Taxi-Trip-Data/t29m-gskq
+1. https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page (already in this folder)
+2. https://data.cityofnewyork.us/Transportation/2018-Yellow-Taxi-Trip-Data/t29m-gskq (large csv file, cannot be uploaded to Github, linked provided here)
