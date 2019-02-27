@@ -2,12 +2,13 @@
 
 ### Output folder
 
-The output directory contains analysis output, processed datasets, logs, or other processed things. Here, it contains processed data of taxi Counts, Fare per distance, Tips and Pickup and Drop-off information.
+The output directory contains analysis output, processed datasets, logs, or other processed things. Here, it contains processed data of 
+pick-up numbers, tip percentage and dropoff information.
 
-1. Count: the dimension of this data frame is 1:263 taxi zones, 1:24 hours in a day, and 1:2 refer to whether it is a business day or not. And then count for the pick up frequency in a certain taxi zone/hour/day.
+1. count_separated.rds: contains pick-up numbers information; 3 dimensional arry; the dimension of this data frame is 1:263 taxi zones, 1:24 hours in a day, and 1:2 refer to whether it is a business day or not. 
 
-2.  Fdp (Fare per distance): the dimension of this data frame is also 1:263 taxi zones, 1:24 hours in a day, and 1:2 refer to business/ non-business day. Then count for the fare per mile in a given pick up taxi zone/hour/day. 
+2. tips_separated.rds: contains tip percentage information; 3 dimensional arry;  the dimension of this data frame is 1:263 taxi zones, 1:24 hours in a day, and 1:2 refer to whether it is a business day or not. 
 
-3. Tips: the dimension of this data frame is 1:263 taxi zones, and 1:2 refer to whether it is a business day or not. And then calculate the tips percentage  (i.e. tips amount / trip fare ) in a given pick up taxi zone/day.
+3. dropoff_frequency: large dataframe; variables: busi(whether it is a business day), hour(which hour during the day), PULocationID(pick-up location), DOLocationID(drop-off location), n (number of dropoffs in that drop-off location), freq (starting at pick-up location, what percentage of drop-off happens in that drop-off location conditioned on hour and busi).
 
-4.  Dropoff: Distinguished by business/ non-business day and 24 hours, count for the total trips made in a given pick up taxi zone to a given drop off taxi zone.
+4: shape.rds: contains taxi zone information. 
