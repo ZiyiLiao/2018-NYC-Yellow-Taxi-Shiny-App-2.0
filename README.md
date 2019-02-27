@@ -37,7 +37,7 @@ In this project, we updated data to be the latest 2018 yellow taxi trip records 
 
 Generally, this upgraded app targets at taxi dirvers and provides relevant information for their interests.
 
-+ **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members participated in the design of the app. Haiqing carried out data pre-processing. Haiqing and Shengjie together completed the server part of the Shiny app. All team members contributed to the GitHub repository and prepared the presentation. All team members approve our work presented in our GitHub repository including this contribution statement.
++ **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members participated in the design of the app. Haiqing carried out data pre-processing. Haiqing and Shengjie together completed the server part of the Shiny app. All other team members developed the UI together and contributed to the GitHub repository and prepared the presentation. All team members approve our work presented in our GitHub repository including this contribution statement.
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
