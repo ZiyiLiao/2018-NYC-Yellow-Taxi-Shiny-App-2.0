@@ -1,4 +1,4 @@
-# Project 2: Shiny App Development Version 2.0
+# Shiny App Development Version 2.0
 
 ### [Project Description](doc/project2_desc.md)
 
